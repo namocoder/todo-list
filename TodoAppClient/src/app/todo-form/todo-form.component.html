@@ -1,0 +1,58 @@
+<div class="text-end mb-2">
+    <button mat-flat-button routerLink="/">Back To Todo List</button>
+</div>
+<form [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="form">
+    <div class="row mb-3">
+        <!-- Title -->
+        <div class="col-4">
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Title</mat-label>
+                <input matInput placeholder="Title" formControlName="title">
+                <mat-error *ngIf="!formGroup.controls['title'].valid && formGroup.controls['title'].touched">
+                    TItle is required.
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <!-- Start Date -->
+        <div class="col-4">
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Start Date</mat-label>
+                <input matInput [matDatepicker]="picker" placeholder="MM/DD/YYYY" formControlName="startDate">
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-error *ngIf="!formGroup.controls['startDate'].valid && formGroup.controls['startDate'].touched">
+                    Select valid date.
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <!-- End Date -->
+        <div class="col-4">
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label>End Date</mat-label>
+                <input matInput [matDatepicker]="epicker" placeholder="MM/DD/YYYY" formControlName="endDate">
+                <mat-datepicker-toggle matIconSuffix [for]="epicker"></mat-datepicker-toggle>
+                <mat-datepicker #epicker></mat-datepicker>
+                <mat-error *ngIf="!formGroup.controls['endDate'].valid && formGroup.controls['endDate'].touched">
+                    Select valid date.
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-12">
+            <!-- Description -->
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Description</mat-label>
+                <textarea matInput placeholder="Description" matTextareaAutosize matAutosizeMinRows="2"
+                    matAutosizeMaxRows="5" formControlName="description">
+            </textarea>
+            </mat-form-field>
+        </div>
+    </div>
+
+    <div class="text-end">
+        <button mat-flat-button color="primary" type="submit" class="button" [disabled]="!formGroup.valid">
+            Submit Form
+        </button>
+    </div>
+</form>
